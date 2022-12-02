@@ -1,0 +1,25 @@
+import sqlite3
+con = sqlite3.connect('bancoDeDados.db')
+cur = con.cursor()
+
+def db_insert(nome, sobrenome, cpf, tempoDeServico, remuneracao):
+    return """INSERT INTO funcionarios (nome, sobrenome, cpf, tempoDeServico, remuneracao) 
+    VALUES('{}','{}','{}', {}, {})""".format(nome, sobrenome, cpf, tempoDeServico, remuneracao)
+
+def db_select(data, field):
+    return """SELECT id, nome, sobrenome, cpf, tempoDeServico, remuneracao
+                FROM funcionarios WHERE {}={} """.format(field, data)
+
+def db_update(nome, sobrenome):
+    return """UPDATE funcionarios SET nome = '{}’ 
+    WHERE sobrenome = '{}'  """.format(nome, sobrenome)
+
+def db_delete(data, field):
+    return """DELETE FROM funcionarios 
+    WHERE {} = {} """.format(field, data)
+
+cur.execute(db_delete('2', 'id'))
+data = cur.fetchone()
+con.close()
+print(data)
+

@@ -1,0 +1,8 @@
+import sqlite3
+con = sqlite3.connect('bancoDeDados.db')
+cur = con.cursor()
+
+def db_insert(nome, sobrenome, cpf, tempoDeServico, remuneracao):
+    return """INSERT INTO funcionarios (nome, sobrenome, cpf, tempoDeServico, remuneracao) 
+    VALUES('{}','{}','{}', {}, {})""".format(nome, sobrenome, cpf, tempoDeServico, remuneracao)
+
